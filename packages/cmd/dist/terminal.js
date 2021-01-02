@@ -1,26 +1,37 @@
-import os from "os";
-import {Command} from "./command";
-import * as child_process from "child_process";
-
-export interface Tab {
-    // the command to be executed in this tab
-    cmd: Command;
-    // working directory of this tab
-    cwd?: string | undefined;
-    // tab title
-    title?: string | undefined;
-}
-
-export class TerminalWindow {
-    private readonly tabs: Tab[];
-
-    constructor(
-        private app: "iTerm" | "Terminal" = "Terminal",
-    ) {
+"use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, { enumerable: true, get: function() { return m[k]; } });
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.TerminalWindow = void 0;
+const os_1 = __importDefault(require("os"));
+const command_1 = require("./command");
+const child_process = __importStar(require("child_process"));
+class TerminalWindow {
+    constructor(app = "Terminal") {
+        this.app = app;
         this.tabs = [];
     }
-
-    public addTab(cmd: Command, cwd: string | undefined = undefined, title: string | undefined = undefined): TerminalWindow {
+    addTab(cmd, cwd = undefined, title = undefined) {
         this.tabs.push({
             cmd: cmd,
             cwd: cwd,
@@ -28,10 +39,9 @@ export class TerminalWindow {
         });
         return this;
     }
-
     // open the terminal window
-    public open(): void {
-        const osType = os.type();
+    open() {
+        const osType = os_1.default.type();
         if (osType === "Darwin") {
             // MacOS
             let first = true;
@@ -50,15 +60,17 @@ export class TerminalWindow {
                 }
                 first = false;
             }
-        } else if (osType === "Linux") {
+        }
+        else if (osType === "Linux") {
             // Linux // TODO currently only support ubuntu
             let first = true;
-            const gnomeCmd = new Command("gnome-terminal");
+            const gnomeCmd = new command_1.Command("gnome-terminal");
             for (const tab of this.tabs) {
                 if (first) {
                     gnomeCmd.append("--window");
                     first = false;
-                } else {
+                }
+                else {
                     gnomeCmd.append("--tab");
                 }
                 if (tab.title) {
@@ -70,8 +82,11 @@ export class TerminalWindow {
                 gnomeCmd.append(`--command="${tab.cmd.toString()}"`);
             }
             child_process.spawnSync(gnomeCmd.command, gnomeCmd.args);
-        } else {
+        }
+        else {
             console.error(`Cannot open terminal in system: ${osType}`);
         }
     }
 }
+exports.TerminalWindow = TerminalWindow;
+//# sourceMappingURL=terminal.js.map

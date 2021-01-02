@@ -10,10 +10,11 @@ export class Command {
 
     /**
      * Construct a new Command, with optional segments
+     * @param segment
      * @param segments
      */
-    constructor(...segments: string[]) {
-        this.payload = [];
+    constructor(segment: string, ...segments: string[]) {
+        this.payload = [segment];
         for (const seg of segments) {
             const ss = seg.split(" ");
             for (const s of ss) {
@@ -50,7 +51,7 @@ export class Command {
      * Shallow copy this command, otherCmds will only copy reference
      */
     public copy(): Command {
-        const cmd = new Command(...this.payload);
+        const cmd = new Command(this.payload[0], ...this.payload.slice(1));
         cmd.otherCmds = [...this.otherCmds];
         return cmd;
     }
@@ -66,14 +67,14 @@ export class Command {
     /**
      * get the child_process.spawn-like command
      */
-    get command(): string | undefined {
-        return this.payload.length > 0 ? this.payload[0] : undefined;
+    get command(): string {
+        return this.payload[0];
     }
 
     /**
      * get the child_process.spawn-like args list
      */
-    get args(): string[] | undefined {
-        return this.payload.length > 0 ? this.payload.slice(1) : undefined;
+    get args(): string[] {
+        return this.payload.slice(1);
     }
 }

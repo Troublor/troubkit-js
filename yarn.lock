@@ -1717,8 +1717,6 @@ __metadata:
   dependencies:
     "@types/jest": ^26.0.19
     "@types/node": ^14.14.14
-    "@types/triple-beam": ^1
-    "@types/winston": ^2.4.4
     jest: ^26.6.3
     ts-jest: ^26.4.4
     ts-node: ^9.1.1
@@ -1744,6 +1742,19 @@ __metadata:
     ts-node: ^9.1.1
     typescript: ^4.1.3
     winston: ^3.3.3
+  languageName: unknown
+  linkType: soft
+
+"@troubkit/tools@workspace:packages/tools":
+  version: 0.0.0-use.local
+  resolution: "@troubkit/tools@workspace:packages/tools"
+  dependencies:
+    "@types/jest": ^26.0.19
+    "@types/node": ^14.14.14
+    jest: ^26.6.3
+    ts-jest: ^26.4.4
+    ts-node: ^9.1.1
+    typescript: ^4.1.3
   languageName: unknown
   linkType: soft
 
@@ -1928,15 +1939,6 @@ __metadata:
   version: 1.3.2
   resolution: "@types/triple-beam@npm:1.3.2"
   checksum: 56eacbe1095889964e6620fc289a008d15c4223302931ebb3c74a92f3f22ca0ae3c5e20a0bd0a2abc81d8654d064df2d87a1151378dfa65979016c2c64ce0e1b
-  languageName: node
-  linkType: hard
-
-"@types/winston@npm:^2.4.4":
-  version: 2.4.4
-  resolution: "@types/winston@npm:2.4.4"
-  dependencies:
-    winston: "*"
-  checksum: 2a6738177a4a6069420ea812a2c61cef25494af0615ee94cff304aa81d059539b8fba03a9fec96ab9b3d7de19f6bc6917fd58f2bc85551b106eeda82a9820f56
   languageName: node
   linkType: hard
 
@@ -10073,7 +10075,7 @@ typescript@^4.1.3:
   languageName: node
   linkType: hard
 
-"winston@npm:*, winston@npm:^3.3.3":
+"winston@npm:^3.3.3":
   version: 3.3.3
   resolution: "winston@npm:3.3.3"
   dependencies:

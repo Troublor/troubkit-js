@@ -7,10 +7,11 @@ This module defines helpers for uses of terminal, including execute commands in 
 class Command {
     /**
      * Construct a new Command, with optional segments
+     * @param segment
      * @param segments
      */
-    constructor(...segments) {
-        this.payload = [];
+    constructor(segment, ...segments) {
+        this.payload = [segment];
         for (const seg of segments) {
             const ss = seg.split(" ");
             for (const s of ss) {
@@ -44,7 +45,7 @@ class Command {
      * Shallow copy this command, otherCmds will only copy reference
      */
     copy() {
-        const cmd = new Command(...this.payload);
+        const cmd = new Command(this.payload[0], ...this.payload.slice(1));
         cmd.otherCmds = [...this.otherCmds];
         return cmd;
     }
@@ -60,13 +61,13 @@ class Command {
      * get the child_process.spawn-like command
      */
     get command() {
-        return this.payload.length > 0 ? this.payload[0] : undefined;
+        return this.payload[0];
     }
     /**
      * get the child_process.spawn-like args list
      */
     get args() {
-        return this.payload.length > 0 ? this.payload.slice(1) : undefined;
+        return this.payload.slice(1);
     }
 }
 exports.Command = Command;
