@@ -242,4 +242,4 @@ out
 out
 gen
 .DS_Store
-./dist
+/dist

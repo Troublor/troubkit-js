@@ -9,8 +9,6 @@
     "build": "tsc",
     "test": "jest"
   },
-  "dependencies": {
-  },
   "devDependencies": {
     "@types/jest": "^26.0.19",
     "@types/node": "^14.14.14",

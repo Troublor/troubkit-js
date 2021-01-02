@@ -1,1 +1,0 @@
-{"version":3,"file":"stdout-transport.js","sourceRoot":"src/","sources":["transports/stdout-transport.ts"],"names":[],"mappings":";;;AAEA,MAAM,eAAe;IACjB,SAAS;QACL,OAAO,OAAO,CAAC,MAAM,CAAC;IAC1B,CAAC;CACJ;AAEY,QAAA,eAAe,GAAG,IAAI,eAAe,EAAE,CAAC"}
