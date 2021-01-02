@@ -11,14 +11,50 @@ class Command {
      * @param segments
      */
     constructor(segment, ...segments) {
-        this.payload = [segment];
+        segments.unshift(segment);
+        this.payload = [];
         for (const seg of segments) {
-            const ss = seg.split(" ");
+            const ss = Command.split(seg);
             for (const s of ss) {
                 s.length > 0 ? this.payload.push(s) : undefined;
             }
         }
+        if (this.payload.length === 0) {
+            throw new Error("command must not be empty");
+        }
         this.otherCmds = [];
+    }
+    static split(str) {
+        const secs = [];
+        let inString = false;
+        let cache = [];
+        for (let i = 0; i < str.length; i++) {
+            const char = str.charAt(i);
+            if (inString) {
+                if (char === inString) {
+                    inString = false;
+                }
+                else {
+                    cache.push(char);
+                }
+            }
+            else if (char === " ") {
+                if (cache.length > 0) {
+                    secs.push(cache.join(""));
+                    cache = [];
+                }
+            }
+            else if (char === "\"" || char === "'") {
+                inString = char;
+            }
+            else {
+                cache.push(char);
+            }
+        }
+        if (cache.length > 0) {
+            secs.push(cache.join(""));
+        }
+        return secs;
     }
     /**
      * Append more segments to the end of command
@@ -26,7 +62,7 @@ class Command {
      */
     append(...segments) {
         for (const seg of segments) {
-            const ss = seg.split(" ");
+            const ss = Command.split(seg);
             for (const s of ss) {
                 s.length > 0 ? this.payload.push(s) : undefined;
             }

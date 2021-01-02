@@ -1,6 +1,7 @@
 export declare class Command {
     private otherCmds;
     private readonly payload;
+    static split(str: string): string[];
     /**
      * Construct a new Command, with optional segments
      * @param segment
