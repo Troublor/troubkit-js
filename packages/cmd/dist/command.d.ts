@@ -1,7 +1,11 @@
+export interface Segment {
+    rawStr: string;
+    parsedStr: string;
+}
 export declare class Command {
     private otherCmds;
     private readonly payload;
-    static split(str: string): string[];
+    static split(str: string): Segment[];
     /**
      * Construct a new Command, with optional segments
      * @param segment

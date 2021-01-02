@@ -1,17 +1,25 @@
 import {Command} from "../src";
+import {Segment} from "../src";
+
+function genSegment(raw: string, parsed?: string): Segment {
+    return {
+        rawStr: raw,
+        parsedStr: parsed ? parsed : raw,
+    };
+}
 
 describe("Command split", () => {
     test("should handle basic string", () => {
         const segments = Command.split("ls a  b");
-        expect(segments).toEqual(["ls", "a", "b"]);
+        expect(segments).toEqual([genSegment("ls"), genSegment("a"), genSegment("b")]);
     });
 
     test("should handle inner string", () => {
         let segments = Command.split("ls 'a  \"b c\"'");
-        expect(segments).toEqual(["ls", "a  \"b c\""]);
+        expect(segments).toEqual([genSegment("ls"), genSegment("'a  \"b c\"'", "a  \"b c\"")]);
 
         segments = Command.split("ls \"a  b c\"");
-        expect(segments).toEqual(["ls", "a  b c"]);
+        expect(segments).toEqual([genSegment("ls"), genSegment("\"a  b c\"", "a  b c")]);
     });
 });
 
@@ -48,5 +56,18 @@ describe("Command", () => {
         const cmd = new Command("cmd 'a b'")
             .append("\" c d\"");
         expect(cmd.args).toEqual(["a b", " c d"]);
+    });
+
+    test("should generate equivalent string", () => {
+        const cmd = new Command("cmd 'a b'")
+            .append("\" c d\"");
+        expect(cmd.toString()).toEqual("cmd 'a b' \" c d\"");
+    });
+
+    test("should handle transformed chars", ()=>{
+        const cmd = new Command("cmd '\\'ab\"a\"' ");
+        expect(cmd.toString()).toEqual("cmd '\\'ab\"a\"'");
+        expect(cmd.command).toEqual("cmd");
+        expect(cmd.args).toEqual(["'ab\"a\""]);
     });
 });

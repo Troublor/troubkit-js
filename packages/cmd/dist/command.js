@@ -1,9 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Command = void 0;
-/*
-This module defines helpers for uses of terminal, including execute commands in new terminal tab and so on.
- */
 class Command {
     /**
      * Construct a new Command, with optional segments
@@ -16,7 +13,7 @@ class Command {
         for (const seg of segments) {
             const ss = Command.split(seg);
             for (const s of ss) {
-                s.length > 0 ? this.payload.push(s) : undefined;
+                s.rawStr.length > 0 ? this.payload.push(s) : undefined;
             }
         }
         if (this.payload.length === 0) {
@@ -25,34 +22,53 @@ class Command {
         this.otherCmds = [];
     }
     static split(str) {
+        const parseCache = (raw, parsed) => {
+            return {
+                rawStr: raw.join(""),
+                parsedStr: parsed.join(""),
+            };
+        };
         const secs = [];
         let inString = false;
-        let cache = [];
+        let transformed = false;
+        let rawCache = [];
+        let parsedCache = [];
         for (let i = 0; i < str.length; i++) {
             const char = str.charAt(i);
-            if (inString) {
-                if (char === inString) {
-                    inString = false;
-                }
-                else {
-                    cache.push(char);
-                }
-            }
-            else if (char === " ") {
-                if (cache.length > 0) {
-                    secs.push(cache.join(""));
-                    cache = [];
-                }
-            }
-            else if (char === "\"" || char === "'") {
-                inString = char;
+            if (char === "\\" && !transformed) {
+                rawCache.push(char);
+                transformed = true;
             }
             else {
-                cache.push(char);
+                if (inString) {
+                    rawCache.push(char);
+                    if (char === inString && !transformed) {
+                        inString = false;
+                    }
+                    else {
+                        parsedCache.push(char);
+                    }
+                }
+                else if (char === " ") {
+                    if (rawCache.length > 0) {
+                        secs.push(parseCache(rawCache, parsedCache));
+                        rawCache = [];
+                        parsedCache = [];
+                    }
+                }
+                else if ((char === "\"" || char === "'") && !transformed) {
+                    rawCache.push(char);
+                    inString = char;
+                }
+                else {
+                    rawCache.push(char);
+                    parsedCache.push(char);
+                }
+                transformed = false;
             }
         }
-        if (cache.length > 0) {
-            secs.push(cache.join(""));
+        if (rawCache.length > 0) {
+            secs.push(parseCache(rawCache, parsedCache));
         }
         return secs;
     }
@@ -64,7 +80,7 @@ class Command {
         for (const seg of segments) {
             const ss = Command.split(seg);
             for (const s of ss) {
-                s.length > 0 ? this.payload.push(s) : undefined;
+                s.rawStr.length > 0 ? this.payload.push(s) : undefined;
             }
         }
         return this;
@@ -81,29 +97,29 @@ class Command {
      * Shallow copy this command, otherCmds will only copy reference
      */
     copy() {
-        const cmd = new Command(this.payload[0], ...this.payload.slice(1));
+        const cmd = new Command(this.payload[0].rawStr, ...this.payload.slice(1).map(value => value.rawStr));
         cmd.otherCmds = [...this.otherCmds];
         return cmd;
     }
     toString() {
         if (this.otherCmds.length <= 0) {
-            return `${this.payload.join(" ")}`;
+            return `${this.payload.map(value => value.rawStr).join(" ")}`;
         }
         else {
-            return `${this.payload.join(" ")} && ${this.otherCmds.map(cmd => cmd.toString()).join(" && ")}`;
+            return `${this.payload.map(value => value.rawStr).join(" ")} && ${this.otherCmds.map(cmd => cmd.toString()).join(" && ")}`;
         }
     }
     /**
      * get the child_process.spawn-like command
      */
     get command() {
-        return this.payload[0];
+        return this.payload[0].parsedStr;
     }
     /**
      * get the child_process.spawn-like args list
      */
     get args() {
-        return this.payload.slice(1);
+        return this.payload.slice(1).map(value => value.parsedStr);
     }
 }
 exports.Command = Command;
