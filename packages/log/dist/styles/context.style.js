@@ -14,7 +14,7 @@ class ContextStyle extends colorful_1.Colorful {
         const logTime = `${month}-${day}|${hour}:${minute}:${second}.${millisecond}`;
         // only take the first two arguments
         const args = loggingEvent.args;
-        let msg = loggingEvent.message;
+        const msg = loggingEvent.message;
         let context;
         if (!args) {
             context = {};

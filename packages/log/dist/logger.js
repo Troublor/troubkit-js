@@ -62,6 +62,7 @@ class Logger extends events_1.EventEmitter {
                     moduleName: this.module,
                     level: winstonLevel2level(info.level),
                     message: info.message,
+                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                     // @ts-ignore
                     args: info[triple_beam_1.SPLAT],
                     time: new Date(info.timestamp),

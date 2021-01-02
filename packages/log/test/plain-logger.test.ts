@@ -9,19 +9,19 @@ describe("PlainLogger", function () {
         const transport = StreamTransport(writable);
         const logger = new PlainLogger(Level.INFO, transport);
         await writable.expectLog(() => {
-            logger.error("ERROR")
+            logger.error("ERROR");
         }, "[ERROR] ERROR");
         await writable.expectLog(() => {
-            logger.warn("WARN")
+            logger.warn("WARN");
         }, "[WARN] WARN");
         await writable.expectLog(() => {
-            logger.info("INFO")
+            logger.info("INFO");
         }, "[INFO] INFO");
         await writable.expectNoLog(() => {
-            logger.debug("DEBUG")
+            logger.debug("DEBUG");
         });
         await writable.expectNoLog(() => {
-            logger.trace("TRACE")
+            logger.trace("TRACE");
         });
     });
 });

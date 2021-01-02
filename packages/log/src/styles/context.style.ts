@@ -18,7 +18,7 @@ export class ContextStyle extends Colorful implements LogStyle<ContextStyleArg> 
 
         // only take the first two arguments
         const args = loggingEvent.args;
-        let msg: string = loggingEvent.message;
+        const msg: string = loggingEvent.message;
         let context: { [key: string]: Printable };
         if (!args) {
             context = {};

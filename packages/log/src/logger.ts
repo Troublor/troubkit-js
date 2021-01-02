@@ -21,7 +21,7 @@ function level2winstonLevel(level: Level): string {
         case Level.TRACE:
             return "silly";
         default:
-            return "info"
+            return "info";
     }
 }
 
@@ -69,11 +69,12 @@ export class Logger<T extends ArgType> extends EventEmitter {
                         moduleName: this.module,
                         level: winstonLevel2level(info.level),
                         message: info.message,
+                        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
                         // @ts-ignore
                         args: info[SPLAT] as unknown as T,
                         time: new Date(info.timestamp),
                         pid: process.pid,
-                    }
+                    };
                     return style.format(logEvent);
                 }),
             ),

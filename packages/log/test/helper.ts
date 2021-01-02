@@ -1,17 +1,17 @@
 import * as stream from "stream";
 
 export class LogAssertion extends stream.Writable {
-    isAsserting: boolean = false;
+    isAsserting = false;
     expectedValue: string | RegExp = "";
-    resolve: Function | undefined;
+    resolve: (() => void | undefined) | undefined;
 
     constructor() {
         super();
         this.isAsserting = false;
     }
 
-    _write(chunk: any, encoding: BufferEncoding, callback: (error?: (Error | null)) => void) {
-        const str = Buffer.from(chunk, encoding).toString();
+    _write(chunk: Buffer, encoding: BufferEncoding, callback: (error?: (Error | null)) => void): void {
+        const str = chunk.toString("utf-8");
         if (this.isAsserting) {
             if (typeof this.expectedValue === "string") {
                 expect(str.trim()).toEqual(this.expectedValue.trim());
@@ -26,7 +26,7 @@ export class LogAssertion extends stream.Writable {
         callback();
     }
 
-    async expectLog(fn: () => void, expected: string | RegExp) {
+    async expectLog(fn: () => void, expected: string | RegExp): Promise<void> {
         return new Promise<void>(resolve1 => {
             this.isAsserting = true;
             this.expectedValue = expected;
@@ -35,7 +35,7 @@ export class LogAssertion extends stream.Writable {
         });
     }
 
-    async expectNoLog(fn: () => void) {
+    async expectNoLog(fn: () => void): Promise<void> {
         return new Promise<void>(resolve1 => {
             this.isAsserting = true;
             this.expectedValue = "^unexpected$";
