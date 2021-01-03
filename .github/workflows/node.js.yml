@@ -30,3 +30,10 @@ jobs:
       uses: CultureHQ/actions-yarn@v1.0.1
     - run: yarn
     - run: yarn test
+    - name: Codecov
+      uses: codecov/codecov-action@v1.0.11
+      with:
+        # Repository upload token - get it from codecov.io. Required only for private repositories
+        token: c1f66fa6-2310-44bf-83c8-3dc9303dbee0
+        # Path to coverage file to upload
+        directory: coverage
