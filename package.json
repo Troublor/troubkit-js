@@ -7,7 +7,7 @@
   "scripts": {
     "lint": "eslint --fix .",
     "build": "yarn workspaces foreach run build",
-    "test": "yarn workspaces foreach run test"
+    "test": "jest"
   },
   "workspaces": [
     "packages/*"
