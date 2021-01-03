@@ -49,8 +49,8 @@ class TerminalWindow {
             for (const tab of this.tabs) {
                 const r = child_process.spawnSync("osascript", [
                     "-e", `tell application "${this.app}" to activate`,
-                    "-e", `tell application "System Events" to tell process "Terminal" to keystroke "${first ? "n" : "t"}" using {command down}`,
-                    "-e", `tell application "Terminal" to do script "${tab.cmd.toString()}" in selected tab of the front window`,
+                    "-e", `tell application "System Events" to tell process "${this.app}" to keystroke "${first ? "n" : "t"}" using {command down}`,
+                    "-e", `tell application "${this.app}" to do script "${tab.cmd.toEscapedString()}" in selected tab of the front window`,
                 ]);
                 if (r.error) {
                     throw r.error;

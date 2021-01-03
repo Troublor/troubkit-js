@@ -101,20 +101,26 @@ class Command {
         cmd.otherCmds = this.otherCmds.map(value => value.copy());
         return cmd;
     }
+
     toString() {
         if (this.otherCmds.length <= 0) {
             return `${this.payload.map(value => value.rawStr).join(" ")}`;
-        }
-        else {
+        } else {
             return `${this.payload.map(value => value.rawStr).join(" ")} && ${this.otherCmds.map(cmd => cmd.toString()).join(" && ")}`;
         }
     }
+
+    toEscapedString() {
+        return this.toString().replace(/\\/g, "\\\\").replace(/"/g, "\\\"");
+    }
+
     /**
      * get the child_process.spawn-like command
      */
     get command() {
         return this.payload[0].parsedStr;
     }
+
     /**
      * get the child_process.spawn-like args list
      */

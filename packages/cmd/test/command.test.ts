@@ -88,6 +88,11 @@ describe("Command", () => {
         expect(cmd.toString()).toEqual("cmd 'a b' \" c d\"");
     });
 
+    test("should escape string", () => {
+        const cmd = new Command("cmd \"a\"");
+        expect(cmd.toEscapedString()).toEqual("cmd \\\"a\\\"");
+    });
+
     test("should handle transformed chars", () => {
         const cmd = new Command("cmd '\\'ab\"a\"' ");
         expect(cmd.toString()).toEqual("cmd '\\'ab\"a\"'");
@@ -121,5 +126,12 @@ describe("Command", () => {
         expect(cmd.toString()).toEqual("cmd \\\"a");
         expect(cmd.command).toEqual("cmd");
         expect(cmd.args).toEqual(["\"a"]);
+    });
+
+    test("should handle corner case4", () => {
+        const cmd = new Command("cmd \\'a\\'");
+        expect(cmd.toString()).toEqual("cmd \\'a\\'");
+        expect(cmd.command).toEqual("cmd");
+        expect(cmd.args).toEqual(["'a'"]);
     });
 });

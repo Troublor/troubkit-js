@@ -120,6 +120,10 @@ export class Command {
         }
     }
 
+    public toEscapedString(): string {
+        return this.toString().replace(/\\/g, "\\\\").replace(/"/g, "\\\"");
+    }
+
     /**
      * get the child_process.spawn-like command
      */

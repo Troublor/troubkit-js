@@ -3,7 +3,7 @@ import {Command} from "../src";
 
 describe("terminal", () => {
     test("should open tabs", () => {
-        const cmd = new Command("mkdir \"a ba c\"");
-        new TerminalWindow("Terminal").addTab(cmd).addTab(new Command("ls -a")).open();
+        const cmd = new Command("ls '-a'");
+        new TerminalWindow("Terminal").addTab(cmd).addTab(new Command("echo \"abc\"")).open();
     });
 });
