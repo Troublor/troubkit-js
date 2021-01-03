@@ -27,9 +27,7 @@ export declare class Command {
      */
     copy(): Command;
     toString(): string;
-
     toEscapedString(): string;
-
     /**
      * get the child_process.spawn-like command
      */
