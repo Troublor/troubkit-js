@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "module": "commonjs",
-    "target": "es2020",
+    "target": "es2018",
     "moduleResolution": "Node",
     "declaration": true,
     "sourceRoot": "src",
@@ -10,6 +10,6 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
-    "outDir": "dist",
+    "outDir": "dist"
   },
 }
