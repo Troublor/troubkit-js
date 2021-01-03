@@ -108,7 +108,7 @@ export class Command {
      */
     public copy(): Command {
         const cmd = new Command(this.payload[0].rawStr, ...this.payload.slice(1).map(value => value.rawStr));
-        cmd.otherCmds = [...this.otherCmds];
+        cmd.otherCmds = this.otherCmds.map(value => value.copy());
         return cmd;
     }
 
