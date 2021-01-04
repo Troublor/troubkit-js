@@ -1,1 +1,10 @@
-{"version":3,"file":"index.js","sourceRoot":"src/","sources":["transports/index.ts"],"names":[],"mappings":";;;;;;;;;;;;AAAA,6CAA2B;AAC3B,qDAAmC;AACnC,mDAAiC;AACjC,qDAAmC"}
+{
+  "version": 3,
+  "file": "index.js",
+  "sourceRoot": "../src/",
+  "sources": [
+    "transports/index.ts"
+  ],
+  "names": [],
+  "mappings": ";;;;;;;;;;;;AAAA,6CAA2B;AAC3B,qDAAmC;AACnC,mDAAiC;AACjC,qDAAmC"
+}

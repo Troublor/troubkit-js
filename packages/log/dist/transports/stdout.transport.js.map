@@ -1,1 +1,10 @@
-{"version":3,"file":"stdout.transport.js","sourceRoot":"src/","sources":["transports/stdout.transport.ts"],"names":[],"mappings":";;;AAGA,MAAM,eAAe;IACjB,SAAS;QACL,OAAO,OAAO,CAAC,MAAM,CAAC;IAC1B,CAAC;CACJ;AAEM,MAAM,eAAe,GAAG,GAAiB,EAAE,CAAC,IAAI,eAAe,EAAE,CAAC;AAA5D,QAAA,eAAe,mBAA6C"}
+{
+  "version": 3,
+  "file": "stdout.transport.js",
+  "sourceRoot": "../src/",
+  "sources": [
+    "transports/stdout.transport.ts"
+  ],
+  "names": [],
+  "mappings": ";;;AAGA,MAAM,eAAe;IACjB,SAAS;QACL,OAAO,OAAO,CAAC,MAAM,CAAC;IAC1B,CAAC;CACJ;AAEM,MAAM,eAAe,GAAG,GAAiB,EAAE,CAAC,IAAI,eAAe,EAAE,CAAC;AAA5D,QAAA,eAAe,mBAA6C"
+}
