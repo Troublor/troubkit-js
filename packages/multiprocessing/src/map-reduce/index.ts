@@ -16,6 +16,22 @@ export async function map<D extends Serializable, M extends Serializable>(
     }
     return new Promise<M[]>((rs, rj) => {
         const exitPromises: Promise<void>[] = [];
+        const exitAllWorkers = () => {
+            // tell all workers to exit
+            for (const worker of [...freeWorkers, ...busyWorkers]) {
+                try {
+                    worker.send({
+                        isEnd: true,
+                        data: null,
+                        error: null,
+                    } as TransportData<D>);
+                } catch (e) {
+                    if (e.message !== "write EPIPE") { // only if the worker has not exit
+                        throw e;
+                    }
+                }
+            }
+        };
 
         let resolved = false;
         let rejected = false;
@@ -25,14 +41,7 @@ export async function map<D extends Serializable, M extends Serializable>(
             }
             resolved = true;
 
-            // tell all workers to exit
-            for (const worker of [...freeWorkers, ...busyWorkers]) {
-                worker.send({
-                    isEnd: true,
-                    data: null,
-                    error: null,
-                } as TransportData<D>);
-            }
+            exitAllWorkers();
 
             Promise.all(exitPromises).then(() => {
                 rs(payload);
@@ -44,14 +53,7 @@ export async function map<D extends Serializable, M extends Serializable>(
             }
             rejected = true;
 
-            // tell all workers to exit
-            for (const worker of [...freeWorkers, ...busyWorkers]) {
-                worker.send({
-                    isEnd: true,
-                    data: null,
-                    error: null,
-                } as TransportData<D>);
-            }
+            exitAllWorkers();
 
             Promise.all(exitPromises).then(() => {
                 rj(e);

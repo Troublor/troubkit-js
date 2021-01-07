@@ -38,6 +38,22 @@ async function map(dataList, mapperFile, numWorkers = os.cpus().length, errHandl
     }
     return new Promise((rs, rj) => {
         const exitPromises = [];
+        const exitAllWorkers = () => {
+            // tell all workers to exit
+            for (const worker of [...freeWorkers, ...busyWorkers]) {
+                try {
+                    worker.send({
+                        isEnd: true,
+                        data: null,
+                        error: null,
+                    });
+                } catch (e) {
+                    if (e.message !== "write EPIPE") { // only if the worker has not exit
+                        throw e;
+                    }
+                }
+            }
+        };
         let resolved = false;
         let rejected = false;
         const resolve = (payload) => {
@@ -45,14 +61,7 @@ async function map(dataList, mapperFile, numWorkers = os.cpus().length, errHandl
                 return;
             }
             resolved = true;
-            // tell all workers to exit
-            for (const worker of [...freeWorkers, ...busyWorkers]) {
-                worker.send({
-                    isEnd: true,
-                    data: null,
-                    error: null,
-                });
-            }
+            exitAllWorkers();
             Promise.all(exitPromises).then(() => {
                 rs(payload);
             });
@@ -62,14 +71,7 @@ async function map(dataList, mapperFile, numWorkers = os.cpus().length, errHandl
                 return;
             }
             rejected = true;
-            // tell all workers to exit
-            for (const worker of [...freeWorkers, ...busyWorkers]) {
-                worker.send({
-                    isEnd: true,
-                    data: null,
-                    error: null,
-                });
-            }
+            exitAllWorkers();
             Promise.all(exitPromises).then(() => {
                 rj(e);
             });
