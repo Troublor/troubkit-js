@@ -108,7 +108,7 @@ export class ReactiveList<T> {
     public [Symbol.iterator](): Iterator<T> {
         const iterator = {
             iter: this.list[Symbol.iterator](),
-            next: (...args: []): IteratorResult<T, any> => {
+            next: (...args: []): IteratorResult<T, T | undefined> => {
                 const r = iterator.iter.next(...args);
                 if (!r.done) {
                     if (!this.beforeVisitHook(r.value)) {
