@@ -26,25 +26,20 @@ Object.defineProperty(exports, "__esModule", {value: true});
 exports.ReactiveList = void 0;
 const _ = __importStar(require("lodash"));
 const index_1 = require("./index");
-
 class ReactiveList {
     constructor(hooks = {}, ...dataList) {
         this.hooks = hooks;
         this.list = dataList;
     }
-
     toArray() {
         return _.cloneDeep(this.list);
     }
-
     length() {
         return this.list.length;
     }
-
     empty() {
         return this.list.length === 0;
     }
-
     beforeVisitHook(value) {
         if (this.hooks.onVisit) {
             const proceed = this.hooks.onVisit(value);
@@ -52,7 +47,6 @@ class ReactiveList {
         }
         return true;
     }
-
     beforeAddingHook(value) {
         if (this.list.length === 0) {
             if (this.hooks.onEmerge) {
@@ -65,7 +59,6 @@ class ReactiveList {
         }
         return true;
     }
-
     beforeDeletingHook(value) {
         if (this.list.length === 0) {
             if (this.hooks.onEmpty) {
@@ -78,13 +71,11 @@ class ReactiveList {
         }
         return true;
     }
-
     push(value) {
         if (this.beforeAddingHook(value)) {
             this.list.push(value);
         }
     }
-
     pop() {
         if (this.list.length === 0) {
             return undefined;
@@ -95,7 +86,6 @@ class ReactiveList {
         }
         return undefined;
     }
-
     shift() {
         if (this.list.length === 0) {
             return undefined;
@@ -106,19 +96,16 @@ class ReactiveList {
         }
         return undefined;
     }
-
     unshift(value) {
         if (this.beforeAddingHook(value)) {
             this.list.unshift(value);
         }
     }
-
     remove(value) {
         if (this.beforeDeletingHook(value)) {
             index_1.removeItem(this.list, value);
         }
     }
-
     [Symbol.iterator]() {
         const iterator = {
             iter: this.list[Symbol.iterator](),
@@ -137,7 +124,6 @@ class ReactiveList {
         };
         return iterator;
     }
-
     elemAt(index) {
         if (index >= this.list.length) {
             return undefined;
@@ -149,6 +135,5 @@ class ReactiveList {
         return undefined;
     }
 }
-
 exports.ReactiveList = ReactiveList;
 //# sourceMappingURL=reactive-structures.js.map

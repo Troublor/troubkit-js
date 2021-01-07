@@ -32,7 +32,6 @@ const path_1 = __importDefault(require("path"));
 const tools_1 = require("@troubkit/tools");
 const lodash_1 = __importDefault(require("lodash"));
 const os = __importStar(require("os"));
-
 async function map(dataList, mapperFile, numWorkers = os.cpus().length, errHandler) {
     if (dataList.length === 0) {
         return Promise.resolve(lodash_1.default.cloneDeep(dataList));
@@ -166,7 +165,6 @@ async function map(dataList, mapperFile, numWorkers = os.cpus().length, errHandl
         }
     });
 }
-
 exports.map = map;
 // export async function reduce<D extends Serializable, R extends Serializable>(dataList: D[], initialValue: R, reducerFile: string): Promise<R[]> {
 //

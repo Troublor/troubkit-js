@@ -16,7 +16,6 @@ var __exportStar = (this && this.__exportStar) || function (m, exports) {
 Object.defineProperty(exports, "__esModule", {value: true});
 exports.removeItem = exports.convenientTimeString = exports.sleep = void 0;
 __exportStar(require("./reactive-structures"), exports);
-
 async function sleep(ms) {
     return new Promise(resolve => {
         setTimeout(() => {
@@ -24,9 +23,7 @@ async function sleep(ms) {
         }, ms);
     });
 }
-
 exports.sleep = sleep;
-
 function convenientTimeString(options = {
     date: true,
     moment: true,
@@ -45,9 +42,7 @@ function convenientTimeString(options = {
     }
     return str;
 }
-
 exports.convenientTimeString = convenientTimeString;
-
 function removeItem(array, value) {
     const index = array.indexOf(value);
     if (index > -1) {
@@ -55,6 +50,5 @@ function removeItem(array, value) {
     }
     return array;
 }
-
 exports.removeItem = removeItem;
 //# sourceMappingURL=index.js.map
