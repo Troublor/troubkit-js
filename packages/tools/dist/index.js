@@ -1,7 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", {value: true});
 exports.convenientTimeString = exports.sleep = void 0;
-
 async function sleep(ms) {
     return new Promise(resolve => {
         setTimeout(() => {
@@ -9,9 +8,7 @@ async function sleep(ms) {
         }, ms);
     });
 }
-
 exports.sleep = sleep;
-
 function convenientTimeString(options = {
     date: true,
     moment: true,
@@ -30,6 +27,5 @@ function convenientTimeString(options = {
     }
     return str;
 }
-
 exports.convenientTimeString = convenientTimeString;
 //# sourceMappingURL=index.js.map
