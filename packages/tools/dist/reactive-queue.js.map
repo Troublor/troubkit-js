@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "reactive-queue.js",
+  "sourceRoot": "../src/",
+  "sources": [
+    "reactive-queue.ts"
+  ],
+  "names": [],
+  "mappings": ";;;AAAA,MAAa,YAAY;IAGrB,YACqB,UAA4B,EAC5B,WAA6B;QAD7B,eAAU,GAAV,UAAU,CAAkB;QAC5B,gBAAW,GAAX,WAAW,CAAkB;QAE9C,IAAI,CAAC,KAAK,GAAG,EAAE,CAAC;IACpB,CAAC;CAGJ;AAXD,oCAWC"
+}

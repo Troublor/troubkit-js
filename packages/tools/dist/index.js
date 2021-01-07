@@ -1,6 +1,22 @@
 "use strict";
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function (o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    Object.defineProperty(o, k2, {
+        enumerable: true, get: function () {
+            return m[k];
+        }
+    });
+}) : (function (o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __exportStar = (this && this.__exportStar) || function (m, exports) {
+    for (var p in m) if (p !== "default" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);
+};
 Object.defineProperty(exports, "__esModule", {value: true});
-exports.convenientTimeString = exports.sleep = void 0;
+exports.removeItem = exports.convenientTimeString = exports.sleep = void 0;
+__exportStar(require("./reactive-structures"), exports);
+
 async function sleep(ms) {
     return new Promise(resolve => {
         setTimeout(() => {
@@ -8,7 +24,9 @@ async function sleep(ms) {
         }, ms);
     });
 }
+
 exports.sleep = sleep;
+
 function convenientTimeString(options = {
     date: true,
     moment: true,
@@ -27,5 +45,16 @@ function convenientTimeString(options = {
     }
     return str;
 }
+
 exports.convenientTimeString = convenientTimeString;
+
+function removeItem(array, value) {
+    const index = array.indexOf(value);
+    if (index > -1) {
+        array.splice(index, 1);
+    }
+    return array;
+}
+
+exports.removeItem = removeItem;
 //# sourceMappingURL=index.js.map

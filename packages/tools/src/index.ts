@@ -1,3 +1,5 @@
+export * from "./reactive-structures";
+
 export async function sleep(ms: number): Promise<void> {
     return new Promise<void>(resolve => {
         setTimeout(() => {
@@ -23,4 +25,12 @@ export function convenientTimeString(options: { date?: boolean, moment?: boolean
         str += `.${now.getMilliseconds().toString().padEnd(3, "0")}`;
     }
     return str;
+}
+
+export function removeItem<T>(array: T[], value: T): T[] {
+    const index = array.indexOf(value);
+    if (index > -1) {
+        array.splice(index, 1);
+    }
+    return array;
 }

@@ -1,5 +1,5 @@
 import {sleep} from "../src";
-import {convenientTimeString} from "../dist";
+import {convenientTimeString, removeItem} from "../dist";
 
 describe("sleep", () => {
     test("should sleep as expected", async () => {
@@ -35,5 +35,13 @@ describe("convenient time string", () => {
             moment: true,
             millisecond: true,
         })).toMatch(/^\d\d\d\d-\d\d-\d\d \d\d:\d\d:\d\d.\d\d\d$/);
+    });
+});
+
+describe("removeItem", () => {
+    test("should remove", () => {
+        const arr = [1, 2, 3];
+        removeItem(arr, 2);
+        expect(arr).toEqual([1, 3]);
     });
 });
