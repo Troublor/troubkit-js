@@ -1,8 +1,13 @@
+let forbidden = true;
+setTimeout(() => {
+    forbidden = false;
+}, 200);
+
 // eslint-disable-next-line no-undef
 module.exports = function (v) {
     // eslint-disable-next-line no-undef
-    if (process.pid % 2 === 0) {
-        throw new Error("even pid");
+    if (forbidden) {
+        throw new Error("forbidden");
     }
     return v + 1;
 };

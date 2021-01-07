@@ -21,12 +21,12 @@ describe("MapReducer", () => {
     });
 
     test("should throw error when mapper throws and no errHandler is provided", async () => {
-        await expect(map([1, 2, 3, 4], path.join(__dirname, "mapper2"), 2)).rejects.toThrow("even pid");
+        await expect(map([1, 2, 3, 4], path.join(__dirname, "mapper2"), 2)).rejects.toThrow("forbidden");
     });
 
     test("should not throw when mapper throws and errHandler is provided", async () => {
         const mapped = await map([1, 2, 3, 4], path.join(__dirname, "mapper2"), 2, e => {
-            expect(e.message).toEqual("even pid");
+            expect(e.message).toEqual("forbidden");
         });
         expect(mapped.sort()).toEqual([2, 3, 4, 5].sort());
     });
