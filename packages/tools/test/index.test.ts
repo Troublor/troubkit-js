@@ -1,4 +1,4 @@
-import {sleep} from "../src";
+import {sleep} from "../dist";
 import {convenientTimeString, removeItem} from "../dist";
 
 describe("sleep", () => {
