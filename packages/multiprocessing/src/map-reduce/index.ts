@@ -60,7 +60,7 @@ export async function map<D extends Serializable, M extends Serializable>(
             });
         };
         const freeWorkers: ReactiveList<cluster.Worker> = new ReactiveList<cluster.Worker>({
-            onIn: worker => {
+            beforeIn: worker => {
                 // no more data, tell worker to exit
                 if (workDataList.length() === 0) {
                     return;
@@ -81,7 +81,7 @@ export async function map<D extends Serializable, M extends Serializable>(
         });
         const busyWorkers: ReactiveList<cluster.Worker> = new ReactiveList<cluster.Worker>();
         const workDataList: ReactiveList<D> = new ReactiveList<D>({
-            onIn: value => {
+            beforeIn: value => {
                 const worker = freeWorkers.shift();
                 if (!worker) {
                     return true;

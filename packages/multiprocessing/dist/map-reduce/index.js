@@ -77,7 +77,7 @@ async function map(dataList, mapperFile, numWorkers = os.cpus().length, errHandl
             });
         };
         const freeWorkers = new tools_1.ReactiveList({
-            onIn: worker => {
+            beforeIn: worker => {
                 // no more data, tell worker to exit
                 if (workDataList.length() === 0) {
                     return;
@@ -97,7 +97,7 @@ async function map(dataList, mapperFile, numWorkers = os.cpus().length, errHandl
         });
         const busyWorkers = new tools_1.ReactiveList();
         const workDataList = new tools_1.ReactiveList({
-            onIn: value => {
+            beforeIn: value => {
                 const worker = freeWorkers.shift();
                 if (!worker) {
                     return true;
