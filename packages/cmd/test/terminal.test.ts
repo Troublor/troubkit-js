@@ -1,5 +1,5 @@
-import {TerminalWindow} from "../src";
-import {Command} from "../src";
+import {TerminalWindow} from "../dist";
+import {Command} from "../dist";
 
 describe("terminal", () => {
     test("should open tabs", () => {

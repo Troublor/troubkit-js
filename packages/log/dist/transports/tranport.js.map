@@ -1,9 +1,9 @@
 {
   "version": 3,
   "file": "tranport.js",
-  "sourceRoot": "../src/",
+  "sourceRoot": "",
   "sources": [
-    "transports/tranport.ts"
+    "../../src/transports/tranport.ts"
   ],
   "names": [],
   "mappings": ""

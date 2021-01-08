@@ -1,9 +1,9 @@
 {
   "version": 3,
   "file": "index.js",
-  "sourceRoot": "../src/",
+  "sourceRoot": "",
   "sources": [
-    "styles/index.ts"
+    "../../src/styles/index.ts"
   ],
   "names": [],
   "mappings": ";;;;;;;;;;;;AAAA,0CAAwB;AACxB,kDAAgC"

@@ -1,5 +1,5 @@
-import {Command} from "../src";
-import {Segment} from "../src";
+import {Command} from "../dist";
+import {Segment} from "../dist";
 
 function genSegment(raw: string, parsed?: string): Segment {
     return {

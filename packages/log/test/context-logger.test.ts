@@ -1,6 +1,6 @@
-import {ContextLogger, Level} from "../src";
+import {ContextLogger, Level} from "../dist";
 import {LogAssertion} from "./helper";
-import {StreamTransport} from "../src";
+import {StreamTransport} from "../dist";
 
 describe("ContextLogger", function () {
     let asserter: LogAssertion;

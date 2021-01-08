@@ -1,6 +1,6 @@
-import {Level} from "../src";
-import {PlainLogger} from "../src";
-import {StreamTransport} from "../src";
+import {Level} from "../dist";
+import {PlainLogger} from "../dist";
+import {StreamTransport} from "../dist";
 import {LogAssertion} from "./helper";
 
 describe("PlainLogger", function () {
