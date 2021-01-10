@@ -8,8 +8,8 @@ export type ContextStyleArg = [
 
 export class ContextStyle extends Colorful implements LogStyle<ContextStyleArg> {
     format(loggingEvent: LogEvent<ContextStyleArg>): string {
-        const month = loggingEvent.time.getMonth().toString().padStart(2, "0");
-        const day = loggingEvent.time.getDay().toString().padStart(2, "0");
+        const month = (loggingEvent.time.getMonth() + 1).toString().padStart(2, "0");
+        const day = loggingEvent.time.getDate().toString().padStart(2, "0");
         const hour = loggingEvent.time.getHours().toString().padStart(2, "0");
         const minute = loggingEvent.time.getMinutes().toString().padStart(2, "0");
         const second = loggingEvent.time.getSeconds().toString().padStart(2, "0");
