@@ -16,25 +16,20 @@ var Operation;
     Operation["SPLICE"] = "splice";
     Operation["REMOVE_AT"] = "removeAt";
 })(Operation = exports.Operation || (exports.Operation = {}));
-
 class ReactiveList {
     constructor(hooks = {}, ...dataList) {
         this.hooks = hooks;
         this.list = dataList;
     }
-
     toArray() {
         return [...this.list];
     }
-
     length() {
         return this.list.length;
     }
-
     empty() {
         return this.list.length === 0;
     }
-
     onVisitHook(value, operation) {
         if (this.hooks.onVisit) {
             const proceed = this.hooks.onVisit(value, operation);
@@ -42,7 +37,6 @@ class ReactiveList {
         }
         return true;
     }
-
     beforeAddingHook(value, operation) {
         if (this.list.length === 0) {
             if (this.hooks.onEmerge) {
@@ -55,13 +49,11 @@ class ReactiveList {
         }
         return true;
     }
-
     afterAddingHook(value, operation) {
         if (this.hooks.afterIn) {
             this.hooks.afterIn(value, operation);
         }
     }
-
     beforeDeletingHook(value, operation) {
         if (this.hooks.beforeOut) {
             const proceed = this.hooks.beforeOut(value, operation);
@@ -69,7 +61,6 @@ class ReactiveList {
         }
         return true;
     }
-
     afterDeletingHook(value, operation) {
         if (this.list.length === 0) {
             if (this.hooks.onEmpty) {
@@ -80,14 +71,12 @@ class ReactiveList {
             this.hooks.afterOut(value, operation);
         }
     }
-
     push(value) {
         if (this.beforeAddingHook(value, Operation.PUSH)) {
             this.list.push(value);
             this.afterAddingHook(value, Operation.PUSH);
         }
     }
-
     pop() {
         if (this.list.length === 0) {
             return undefined;
@@ -112,21 +101,18 @@ class ReactiveList {
         }
         return undefined;
     }
-
     unshift(value) {
         if (this.beforeAddingHook(value, Operation.UNSHIFT)) {
             this.list.unshift(value);
             this.afterAddingHook(value, Operation.UNSHIFT);
         }
     }
-
     insert(index, value) {
         if (this.beforeAddingHook(value, Operation.INSERT)) {
             this.list.splice(index, 0, value);
             this.afterAddingHook(value, Operation.INSERT);
         }
     }
-
     remove(value) {
         const index = this.list.indexOf(value);
         if (index < 0) {
@@ -155,7 +141,6 @@ class ReactiveList {
         };
         return iterator;
     }
-
     elemAt(index) {
         if (index >= this.list.length) {
             return undefined;
@@ -166,15 +151,12 @@ class ReactiveList {
         }
         return undefined;
     }
-
     indexOf(value, fromIndex) {
         return this.list.indexOf(value, fromIndex);
     }
-
     lastIndexOf(value, fromIndex) {
         return this.list.lastIndexOf(value, fromIndex);
     }
-
     splice(startIndex, deleteCount, ...insertElements) {
         const deletes = this.list.slice(startIndex, startIndex + deleteCount);
         const deletedElements = [];
@@ -193,7 +175,6 @@ class ReactiveList {
         }
         return deletedElements;
     }
-
     removeAt(index) {
         const elem = this.list[index];
         if (this.beforeDeletingHook(elem, Operation.REMOVE_AT)) {
