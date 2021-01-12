@@ -1,7 +1,6 @@
 export declare class Level {
     readonly levelStr: string;
     readonly levelNum: number;
-    static FATAL: Level;
     static ERROR: Level;
     static WARN: Level;
     static INFO: Level;

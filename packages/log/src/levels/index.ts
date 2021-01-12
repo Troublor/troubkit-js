@@ -1,5 +1,4 @@
 export class Level {
-    public static FATAL = new Level("FATAL", 0);
     public static ERROR = new Level("ERROR", 1);
     public static WARN = new Level("WARN", 2);
     public static INFO = new Level("INFO", 3);

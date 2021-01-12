@@ -19,8 +19,6 @@ export abstract class Colorful {
                 return chalk.yellow(str);
             } else if (level.eq(Level.ERROR)) {
                 return chalk.red(str);
-            } else if (level.eq(Level.FATAL)) {
-                return chalk.magenta(str);
             } else {
                 return str;
             }

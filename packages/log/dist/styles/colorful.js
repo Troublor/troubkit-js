@@ -27,9 +27,6 @@ class Colorful {
             else if (level.eq(levels_1.Level.ERROR)) {
                 return chalk_1.default.red(str);
             }
-            else if (level.eq(levels_1.Level.FATAL)) {
-                return chalk_1.default.magenta(str);
-            }
             else {
                 return str;
             }

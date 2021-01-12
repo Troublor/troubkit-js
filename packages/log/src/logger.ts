@@ -7,6 +7,7 @@ import winston from "winston";
 import {SPLAT} from "triple-beam";
 import {LogTransport, StdoutTransport} from "./transports";
 import {PlainStyle, PlainStyleArg} from "./styles/plain.style";
+import {MinimalStyle, MinimalStyleArg} from "./styles/minimal.style";
 
 function level2winstonLevel(level: Level): string {
     switch (level) {
@@ -52,7 +53,7 @@ export class Logger<T extends ArgType> extends EventEmitter {
 
     constructor(
         public module: string,
-        public level: Level,
+        _level: Level,
         style: LogStyle<T>,
         ...transports: LogTransport[]
     ) {
@@ -61,7 +62,7 @@ export class Logger<T extends ArgType> extends EventEmitter {
             transports.push(StdoutTransport());
         }
         this._logger = winston.createLogger({
-            level: level2winstonLevel(this.level),
+            level: level2winstonLevel(_level),
             format: winston.format.combine(
                 winston.format.timestamp(),
                 winston.format.printf(info => {
@@ -87,6 +88,22 @@ export class Logger<T extends ArgType> extends EventEmitter {
         // eslint-disable-next-line @typescript-eslint/no-empty-function
         this.on("error", () => {
         });
+    }
+
+    public set level(lvl: Level) {
+        this._logger.level = level2winstonLevel(lvl);
+    }
+
+    public get level(): Level {
+        return winstonLevel2level(this._logger.level);
+    }
+
+    public get silent(): boolean {
+        return this._logger.silent;
+    }
+
+    public set silent(silent: boolean) {
+        this._logger.silent = silent;
     }
 
     public error(message: string, ...args: T): void {
@@ -131,5 +148,14 @@ export class PlainLogger extends Logger<PlainStyleArg> {
         transport: LogTransport = StdoutTransport(),
     ) {
         super("", level, new PlainStyle(transport.transport() === process.stdout), transport);
+    }
+}
+
+export class MinimalLogger extends Logger<MinimalStyleArg> {
+    constructor(
+        level: Level = Level.INFO,
+        transport: LogTransport = StdoutTransport(),
+    ) {
+        super("", level, new MinimalStyle(transport.transport() === process.stdout), transport);
     }
 }

@@ -20,7 +20,6 @@ class Level {
     }
 }
 exports.Level = Level;
-Level.FATAL = new Level("FATAL", 0);
 Level.ERROR = new Level("ERROR", 1);
 Level.WARN = new Level("WARN", 2);
 Level.INFO = new Level("INFO", 3);

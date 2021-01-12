@@ -38,7 +38,7 @@ export class LogAssertion extends stream.Writable {
     async expectNoLog(fn: () => void): Promise<void> {
         return new Promise<void>(resolve1 => {
             this.isAsserting = true;
-            this.expectedValue = "^unexpected$";
+            this.expectedValue = "^expect no log$";
             this.resolve = resolve1;
             fn();
             setTimeout(() => {
