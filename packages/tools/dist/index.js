@@ -16,6 +16,7 @@ var __exportStar = (this && this.__exportStar) || function (m, exports) {
 Object.defineProperty(exports, "__esModule", {value: true});
 exports.removeItem = exports.convenientTimeString = exports.sleep = void 0;
 __exportStar(require("./reactive-structures"), exports);
+__exportStar(require("./promievent"), exports);
 async function sleep(ms) {
     return new Promise(resolve => {
         setTimeout(() => {
