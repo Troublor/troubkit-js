@@ -1,5 +1,8 @@
 import {EventEmitter} from "events";
 
+export type Resolve<T> = (value: T | PromiseLike<T>) => void;
+export type Reject = (reason?: unknown) => void;
+
 interface Events {
     // event name => argument type list
     [eventName: string]: unknown[];
@@ -22,7 +25,7 @@ export type BuiltinEvents = {
  * Inspired by naddison36/promievent, but provide strict type specification support.
  * @see https://github.com/naddison36/promievent
  */
-export class PromiEvent<T, E extends Events> extends EventEmitter implements Promise<T> {
+export class PromiEvent<T, EV extends Events> extends EventEmitter implements Promise<T> {
     private readonly promise: Promise<T>
     readonly [Symbol.toStringTag]: "Promise"
 
@@ -30,7 +33,7 @@ export class PromiEvent<T, E extends Events> extends EventEmitter implements Pro
     constructor(executor: (
         resolve: (value: T | PromiseLike<T>) => void,
         reject: (reason?: unknown) => void,
-        emitter: PromiEvent<T, E>,
+        emitter: PromiEvent<T, EV>,
     ) => void) {
         // call the EventEmitter constructor
         super();
@@ -68,59 +71,59 @@ export class PromiEvent<T, E extends Events> extends EventEmitter implements Pro
     }
 
     // used if you want to create a PromiEvent for a known failure
-    static reject<T>(reason: unknown): PromiEvent<T, never> {
-        return new PromiEvent<T, never>((resolve, reject) => {
+    static reject<ER>(reason?: ER): PromiEvent<never, never> {
+        return new PromiEvent<never, never>((resolve, reject) => {
             reject(reason);
         });
     }
 
     /* Strictly typed EventEmitter methods */
 
-    addListener<K extends keyof E>(event: K extends string | symbol ? K : never, listener: (...args: E[K]) => void): this {
+    addListener<K extends keyof EV>(event: K extends string | symbol ? K : never, listener: (...args: EV[K]) => void): this {
         return super.addListener(event, listener as ((...args: unknown[]) => void));
     }
 
-    on<K extends keyof E>(event: K extends string | symbol ? K : never, listener: (...args: E[K]) => void): this {
+    on<K extends keyof EV>(event: K extends string | symbol ? K : never, listener: (...args: EV[K]) => void): this {
         return super.on(event, listener as ((...args: unknown[]) => void));
     }
 
-    once<K extends keyof E>(event: K extends string | symbol ? K : never, listener: (...args: E[K]) => void): this {
+    once<K extends keyof EV>(event: K extends string | symbol ? K : never, listener: (...args: EV[K]) => void): this {
         return super.once(event, listener as ((...args: unknown[]) => void));
     }
 
-    removeListener<K extends keyof E>(event: K extends string | symbol ? K : never, listener: (...args: E[K]) => void): this {
+    removeListener<K extends keyof EV>(event: K extends string | symbol ? K : never, listener: (...args: EV[K]) => void): this {
         return super.removeListener(event, listener as ((...args: unknown[]) => void));
     }
 
-    off<K extends keyof E>(event: K extends string | symbol ? K : never, listener: (...args: E[K]) => void): this {
+    off<K extends keyof EV>(event: K extends string | symbol ? K : never, listener: (...args: EV[K]) => void): this {
         return super.off(event, listener as ((...args: unknown[]) => void));
     }
 
-    removeAllListeners<K extends keyof E>(event: K extends string | symbol ? K : never): this {
+    removeAllListeners<K extends keyof EV>(event: K extends string | symbol ? K : never): this {
         return super.removeAllListeners(event);
     }
 
-    listeners<K extends keyof E>(event: K extends string | symbol ? K : never): ((...args: E[K]) => void)[] {
-        return super.listeners(event) as ((...args: E[K]) => void)[];
+    listeners<K extends keyof EV>(event: K extends string | symbol ? K : never): ((...args: EV[K]) => void)[] {
+        return super.listeners(event) as ((...args: EV[K]) => void)[];
     }
 
-    rawListeners<K extends keyof E>(event: K extends string | symbol ? K : never): ((...args: E[K]) => void)[] {
-        return super.rawListeners(event) as ((...args: E[K]) => void)[];
+    rawListeners<K extends keyof EV>(event: K extends string | symbol ? K : never): ((...args: EV[K]) => void)[] {
+        return super.rawListeners(event) as ((...args: EV[K]) => void)[];
     }
 
-    emit<K extends keyof E>(event: K extends string | symbol ? K : never, ...args: E[K]): boolean {
+    emit<K extends keyof EV>(event: K extends string | symbol ? K : never, ...args: EV[K]): boolean {
         return super.emit(event, ...args);
     }
 
-    listenerCount<K extends keyof E>(event: K extends string | symbol ? K : never): number {
+    listenerCount<K extends keyof EV>(event: K extends string | symbol ? K : never): number {
         return super.listenerCount(event);
     }
 
-    prependListener<K extends keyof E>(event: K extends string | symbol ? K : never, listener: (...args: E[K]) => void): this {
+    prependListener<K extends keyof EV>(event: K extends string | symbol ? K : never, listener: (...args: EV[K]) => void): this {
         return super.prependListener(event, listener as ((...args: unknown[]) => void));
     }
 
-    prependOnceListener<K extends keyof E>(event: K extends string | symbol ? K : never, listener: (...args: E[K]) => void): this {
+    prependOnceListener<K extends keyof EV>(event: K extends string | symbol ? K : never, listener: (...args: EV[K]) => void): this {
         return super.prependOnceListener(event, listener as ((...args: unknown[]) => void));
     }
 }
