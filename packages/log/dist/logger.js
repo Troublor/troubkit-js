@@ -79,33 +79,26 @@ class Logger extends events_1.EventEmitter {
         this.on("error", () => {
         });
     }
-
     set level(lvl) {
         this._logger.level = level2winstonLevel(lvl);
     }
-
     get level() {
         return winstonLevel2level(this._logger.level);
     }
-
     get silent() {
         return this._logger.silent;
     }
-
     set silent(silent) {
         this._logger.silent = silent;
     }
-
     error(message, ...args) {
         this.emit(levels_1.Level.ERROR.levelStr, ...args);
         this._logger.log("error", message, ...args);
     }
-
     info(message, ...args) {
         this.emit(levels_1.Level.INFO.levelStr, ...args);
         this._logger.log("info", message, ...args);
     }
-
     warn(message, ...args) {
         this.emit(levels_1.Level.WARN.levelStr, ...args);
         this._logger.log("warn", message, ...args);
@@ -125,22 +118,17 @@ class ContextLogger extends Logger {
         super(module, level, new styles_1.ContextStyle(transport.transport() === process.stdout), transport);
     }
 }
-
 exports.ContextLogger = ContextLogger;
-
 class PlainLogger extends Logger {
     constructor(level = levels_1.Level.INFO, transport = transports_1.StdoutTransport()) {
         super("", level, new plain_style_1.PlainStyle(transport.transport() === process.stdout), transport);
     }
 }
-
 exports.PlainLogger = PlainLogger;
-
 class MinimalLogger extends Logger {
     constructor(level = levels_1.Level.INFO, transport = transports_1.StdoutTransport()) {
         super("", level, new minimal_style_1.MinimalStyle(transport.transport() === process.stdout), transport);
     }
 }
-
 exports.MinimalLogger = MinimalLogger;
 //# sourceMappingURL=logger.js.map
