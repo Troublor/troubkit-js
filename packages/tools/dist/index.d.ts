@@ -1,5 +1,6 @@
 export * from "./reactive-structures";
 export * from "./promievent";
+export * from "./event-emitter";
 export declare function sleep(ms: number): Promise<void>;
 export declare function convenientTimeString(options?: {
     date?: boolean;
