@@ -1,0 +1,17 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "lib": [
+      "ES6"
+    ],
+    "types": [
+      "node",
+      "jest",
+      "lodash"
+    ]
+  },
+  "include": [
+    "src",
+  ]
+}
