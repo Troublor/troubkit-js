@@ -1,5 +1,5 @@
 import * as path from "path";
-import {map} from "../dist";
+import {map} from "../lib";
 
 describe("MapReducer", () => {
     test("should map", async () => {
