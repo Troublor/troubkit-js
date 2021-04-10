@@ -1,5 +1,5 @@
 import {PromiEvent} from "../src";
-import {BuiltinEvents} from "../dist";
+import {BuiltinEvents} from "../lib";
 
 type TestEvents = {
     myEvent: [number, string];

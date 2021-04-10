@@ -1,7 +1,7 @@
 {
   "name": "@troubkit/cmd",
   "version": "0.2.0-alpha.0",
-  "main": "dist/index.js",
+  "main": "lib/index.js",
   "license": "MIT",
   "description": "Tools for interacting with command line",
   "author": "Troublor",

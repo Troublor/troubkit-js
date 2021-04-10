@@ -1,7 +1,7 @@
 {
   "name": "@troubkit/log",
   "version": "0.3.0-alpha.0",
-  "main": "dist/index.js",
+  "main": "lib/index.js",
   "license": "MIT",
   "description": "Modularized logger based on winston",
   "author": "Troublor",

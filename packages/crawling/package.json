@@ -1,8 +1,8 @@
 {
   "name": "@troubkit/crawling",
   "version": "0.4.0",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "license": "MIT",
   "description": "Tools for web crawling with Typescript",
   "author": "Troublor",
@@ -21,5 +21,6 @@
   },
   "dependencies": {
     "lodash": "^4.17.20"
-  }
+  },
+  "gitHead": "b5a3510943c1b4996780bed32453409c2164cae1"
 }

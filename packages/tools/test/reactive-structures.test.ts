@@ -1,5 +1,5 @@
-import {ReactiveList} from "../dist";
-import {Operation} from "../dist";
+import {ReactiveList} from "../lib";
+import {Operation} from "../lib";
 
 describe("ReactiveList", () => {
     test("toArray should return a shallow copy", () => {

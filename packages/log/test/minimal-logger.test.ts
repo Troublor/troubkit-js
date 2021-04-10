@@ -1,5 +1,5 @@
-import {Level, MinimalLogger} from "../dist";
-import {StreamTransport} from "../dist";
+import {Level, MinimalLogger} from "../lib";
+import {StreamTransport} from "../lib";
 import {LogAssertion} from "./helper";
 
 describe("MinimalLogger", function () {

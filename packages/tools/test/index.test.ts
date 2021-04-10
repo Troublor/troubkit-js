@@ -1,5 +1,5 @@
-import {sleep} from "../dist";
-import {convenientTimeString, removeItem} from "../dist";
+import {sleep} from "../lib";
+import {convenientTimeString, removeItem} from "../lib";
 
 describe("sleep", () => {
     test("should sleep as expected", async () => {
