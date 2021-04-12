@@ -1,9 +1,17 @@
-export interface Task<T> {
+import {EventEmitter} from "@troubkit/tools";
+
+export interface Task<T, M = unknown> {
+    metadata: M;
     execute: () => T | PromiseLike<T>;
     callback: ((err: Error | undefined, result: T) => void) | undefined;
 }
 
-export class FrequencyControlledTaskManager {
+export type Events = {
+    newTask: [Task<unknown>],
+    queueEmpty: [],
+}
+
+export class FrequencyControlledTaskManager extends EventEmitter<Events> {
     private readonly pendingTasks: Task<unknown>[];
     private interval: NodeJS.Timeout | undefined;
 
@@ -15,6 +23,7 @@ export class FrequencyControlledTaskManager {
         private readonly controlledPeriod: number,
         private readonly parallelCapacity: number,
     ) {
+        super();
         this.pendingTasks = [];
         this.interval = undefined;
     }
@@ -33,6 +42,10 @@ export class FrequencyControlledTaskManager {
                     task.callback && task.callback(undefined, r);
                 }).catch(err => {
                     task.callback && task.callback(err, undefined);
+                }).finally(() => {
+                    if (this.pendingTasks.length <= 0) {
+                        this.emit("queueEmpty");
+                    }
                 });
             }
         };
@@ -66,5 +79,6 @@ export class FrequencyControlledTaskManager {
             throw new Error("invalid arguments");
         }
         this.pendingTasks.push(task);
+        this.emit("newTask", task);
     }
 }

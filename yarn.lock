@@ -1728,6 +1728,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@troubkit/crawling@workspace:packages/crawling"
   dependencies:
+    "@troubkit/tools": "workspace:*"
     "@types/jest": ^26.0.19
     "@types/lodash": ^4.14.167
     "@types/node": ^14.14.34
@@ -1764,7 +1765,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@troubkit/multiprocessing@workspace:packages/multiprocessing"
   dependencies:
-    "@troubkit/tools": ^0.4.0-alpha.0
+    "@troubkit/tools": ^0.4.0
     "@types/jest": ^26.0.19
     "@types/lodash": ^4.14.167
     "@types/node": ^14.14.14
@@ -1776,7 +1777,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@troubkit/tools@^0.4.0-alpha.0, @troubkit/tools@workspace:packages/tools":
+"@troubkit/tools@^0.4.0, @troubkit/tools@workspace:*, @troubkit/tools@workspace:packages/tools":
   version: 0.0.0-use.local
   resolution: "@troubkit/tools@workspace:packages/tools"
   dependencies:

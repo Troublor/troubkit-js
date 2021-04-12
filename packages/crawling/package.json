@@ -20,6 +20,7 @@
     "typescript": "^4.1.3"
   },
   "dependencies": {
+    "@troubkit/tools": "workspace:*",
     "lodash": "^4.17.20"
   },
   "gitHead": "b5a3510943c1b4996780bed32453409c2164cae1"
