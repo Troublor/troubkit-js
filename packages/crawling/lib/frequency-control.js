@@ -1,12 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.FrequencyControlledTaskManager = void 0;
-class FrequencyControlledTaskManager {
+const tools_1 = require("@troubkit/tools");
+class FrequencyControlledTaskManager extends tools_1.EventEmitter {
     /**
      * @param controlledPeriod the period in milliseconds that the parallelled capacity is applied.
      * @param parallelCapacity the number of tasks that can be run in parallel per controlled period.
      */
     constructor(controlledPeriod, parallelCapacity) {
+        super();
         this.controlledPeriod = controlledPeriod;
         this.parallelCapacity = parallelCapacity;
         this.pendingTasks = [];
@@ -26,6 +28,10 @@ class FrequencyControlledTaskManager {
                     task.callback && task.callback(undefined, r);
                 }).catch(err => {
                     task.callback && task.callback(err, undefined);
+                }).finally(() => {
+                    if (this.pendingTasks.length <= 0) {
+                        this.emit("queueEmpty");
+                    }
                 });
             }
         };
@@ -57,6 +63,7 @@ class FrequencyControlledTaskManager {
             throw new Error("invalid arguments");
         }
         this.pendingTasks.push(task);
+        this.emit("newTask", task);
     }
 }
 exports.FrequencyControlledTaskManager = FrequencyControlledTaskManager;

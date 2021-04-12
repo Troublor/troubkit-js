@@ -1,8 +1,14 @@
-export interface Task<T> {
+import { EventEmitter } from "@troubkit/tools";
+export interface Task<T, M = unknown> {
+    metadata: M;
     execute: () => T | PromiseLike<T>;
     callback: ((err: Error | undefined, result: T) => void) | undefined;
 }
-export declare class FrequencyControlledTaskManager {
+export declare type Events = {
+    newTask: [Task<unknown>];
+    queueEmpty: [];
+};
+export declare class FrequencyControlledTaskManager extends EventEmitter<Events> {
     private readonly controlledPeriod;
     private readonly parallelCapacity;
     private readonly pendingTasks;
