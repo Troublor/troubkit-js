@@ -21,7 +21,7 @@ export declare class Logger<T extends ArgType> extends EventEmitter {
     trace(message: string, ...args: T): void;
 }
 export declare class ContextLogger extends Logger<ContextStyleArg> {
-    constructor(module: string, level?: Level, transport?: LogTransport);
+    constructor(module: string, level?: Level, ...transports: LogTransport[]);
 }
 export declare class PlainLogger extends Logger<PlainStyleArg> {
     constructor(level?: Level, transport?: LogTransport);

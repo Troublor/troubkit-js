@@ -114,8 +114,8 @@ class Logger extends events_1.EventEmitter {
 }
 exports.Logger = Logger;
 class ContextLogger extends Logger {
-    constructor(module, level = levels_1.Level.INFO, transport = transports_1.StdoutTransport()) {
-        super(module, level, new styles_1.ContextStyle(transport.transport() === process.stdout), transport);
+    constructor(module, level = levels_1.Level.INFO, ...transports) {
+        super(module, level, new styles_1.ContextStyle(transports.length === 0 ? true : transports[0].transport() === process.stdout), ...transports);
     }
 }
 exports.ContextLogger = ContextLogger;
