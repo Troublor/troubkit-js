@@ -1,11 +1,13 @@
 /// <reference types="node" />
-import { EventEmitter as Emitter } from "events";
+import {EventEmitter as Emitter} from "events";
+
 export interface Events {
-    [eventName: string]: unknown[];
+    [eventName: string | symbol]: unknown[];
 }
+
 export declare type BuiltinEvents = {
     newListener: [
-        string | symbol,
+            string | symbol,
         (...args: unknown[]) => void
     ];
     removeListener: [

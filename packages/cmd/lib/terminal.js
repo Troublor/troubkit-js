@@ -56,7 +56,7 @@ class TerminalWindow {
                     throw r.error;
                 }
                 if (r.status !== 0) {
-                    throw new Error(r.stderr);
+                    throw new Error(r.stderr.toString());
                 }
                 first = false;
             }

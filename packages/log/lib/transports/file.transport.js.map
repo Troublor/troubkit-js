@@ -1,1 +1,0 @@
-{"version":3,"file":"file.transport.js","sourceRoot":"","sources":["../../src/transports/file.transport.ts"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;;;;;AACA,uCAAyB;AAGzB,SAAgB,aAAa,CAAC,IAAY;IACtC,MAAM,aAAa;QACf,SAAS;YACL,OAAO,EAAE,CAAC,iBAAiB,CAAC,IAAI,EAAE,EAAC,QAAQ,EAAE,OAAO,EAAC,CAAC,CAAC;QAC3D,CAAC;KACJ;IAED,OAAO,IAAI,aAAa,EAAE,CAAC;AAC/B,CAAC;AARD,sCAQC"}

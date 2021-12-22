@@ -41,4 +41,5 @@ class PromiEvent extends event_emitter_1.EventEmitter {
     }
 }
 exports.PromiEvent = PromiEvent;
+Symbol.toStringTag;
 //# sourceMappingURL=promievent.js.map

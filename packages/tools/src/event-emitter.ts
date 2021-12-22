@@ -2,7 +2,7 @@ import {EventEmitter as Emitter} from "events";
 
 export interface Events {
     // event name => argument type list
-    [eventName: string]: unknown[];
+    [eventName: string | symbol]: unknown[];
 }
 
 export type BuiltinEvents = {
