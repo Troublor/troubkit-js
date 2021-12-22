@@ -2041,6 +2041,7 @@ __metadata:
     chalk: ^4.1.2
     jest: ^27.4.5
     lodash: ^4.17.21
+    logform: ^2.3.0
     triple-beam: ^1.3.0
     ts-jest: ^27.1.2
     ts-node: ^10.4.0
@@ -2299,6 +2300,15 @@ __metadata:
   version: 2.4.2
   resolution: "@types/prettier@npm:2.4.2"
   checksum: 76e230b2d11028af11fe12e09b2d5b10b03738e9abf819ae6ebb0f78cac13d39f860755ce05ac3855b608222518d956628f5d00322dc206cc6d1f2d8d1519f1e
+  languageName: node
+  linkType: hard
+
+"@types/source-map-support@npm:^0":
+  version: 0.5.4
+  resolution: "@types/source-map-support@npm:0.5.4"
+  dependencies:
+    source-map: ^0.6.0
+  checksum: 160ff77e8a101b18d9915cb5320fd73d484679aef8518ce007b9b5988e333631778730196c4bb15517ff881bee805663fd8640c0ce2ebfab65f061103c452369
   languageName: node
   linkType: hard
 
@@ -6192,6 +6202,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"logform@npm:^2.3.0":
+  version: 2.3.0
+  resolution: "logform@npm:2.3.0"
+  dependencies:
+    colors: ^1.2.1
+    fecha: ^4.2.0
+    ms: ^2.1.1
+    safe-stable-stringify: ^1.1.0
+    triple-beam: ^1.3.0
+  checksum: a82d36823d487dffeb9c7f468bb60a20a643bb5299860b17050e68866f2b8c18f1a6eeb158ad5ae8aa90ada2923a5f2a04809f1e041dd2167f18308116432970
+  languageName: node
+  linkType: hard
+
 "lru-cache@npm:^6.0.0":
   version: 6.0.0
   resolution: "lru-cache@npm:6.0.0"
@@ -7851,6 +7874,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"safe-stable-stringify@npm:^1.1.0":
+  version: 1.1.1
+  resolution: "safe-stable-stringify@npm:1.1.1"
+  checksum: e32a30720e8a2e3043b8b96733f015c1aa7a21a5a328074ce917b8afe4d26b4308c186c74fa92131e5f794b1efc63caa32defafceaa2981accaaedbc8b2c861c
+  languageName: node
+  linkType: hard
+
 "safer-buffer@npm:>= 2.1.2 < 3, safer-buffer@npm:>= 2.1.2 < 3.0.0, safer-buffer@npm:^2.0.2, safer-buffer@npm:^2.1.0, safer-buffer@npm:~2.1.0":
   version: 2.1.2
   resolution: "safer-buffer@npm:2.1.2"
@@ -8048,6 +8078,16 @@ __metadata:
   dependencies:
     is-plain-obj: ^2.0.0
   checksum: 1535ffd5a789259fc55107d5c3cec09b3e47803a9407fcaae37e1b9e0b813762c47dfee35b6e71e20ca7a69798d0a4791b2058a07f6cab5ef17b2dae83cedbda
+  languageName: node
+  linkType: hard
+
+"source-map-support@npm:^0.5.21":
+  version: 0.5.21
+  resolution: "source-map-support@npm:0.5.21"
+  dependencies:
+    buffer-from: ^1.0.0
+    source-map: ^0.6.0
+  checksum: 43e98d700d79af1d36f859bdb7318e601dfc918c7ba2e98456118ebc4c4872b327773e5a1df09b0524e9e5063bb18f0934538eace60cca2710d1fa687645d137
   languageName: node
   linkType: hard
 
@@ -8651,11 +8691,13 @@ __metadata:
     "@types/eslint": ^7.29.0
     "@types/jest": ^27.0.3
     "@types/node": ^17.0.2
+    "@types/source-map-support": ^0
     "@typescript-eslint/eslint-plugin": ^5.8.0
     "@typescript-eslint/parser": ^5.8.0
     eslint: ^7.32.0
     jest: ^27.4.5
     lerna: ^4.0.0
+    source-map-support: ^0.5.21
     ts-jest: ^27.1.2
     ts-node: ^10.4.0
     typescript: ^4.5.4
