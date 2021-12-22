@@ -9,8 +9,8 @@ export type Reject = (reason?: unknown) => void;
  * @see https://github.com/naddison36/promievent
  */
 export class PromiEvent<T, EV extends Events> extends EventEmitter<EV> implements Promise<T> {
-    private readonly promise: Promise<T>
-    readonly [Symbol.toStringTag]: "Promise"
+    private readonly promise: Promise<T>;
+    readonly [Symbol.toStringTag]: "Promise";
 
     // Have the same constructor as a Promise
     constructor(executor: (
