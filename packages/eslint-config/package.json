@@ -12,6 +12,6 @@
     "eslint-plugin-react": "^7.25.1"
   },
   "dependencies": {
-    "@typescript-eslint/parser": "^4.31.1"
+    "@typescript-eslint/parser": "^5.8.0"
   }
 }
