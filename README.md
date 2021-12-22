@@ -5,3 +5,10 @@
 
 Tools and utilities for everyday use of Node.js
 
+## Publish
+
+```bash
+yarn workspace [workspace] version minor --deferred
+yarn workspace [workspace] version apply
+yarn workspace [workspace] npm publish --access public
+```
