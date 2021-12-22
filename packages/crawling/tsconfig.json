@@ -12,6 +12,9 @@
     ]
   },
   "include": [
-    "src",
+    "src"
+  ],
+  "exclude": [
+    "lib"
   ]
 }

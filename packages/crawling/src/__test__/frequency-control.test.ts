@@ -1,14 +1,14 @@
-import {FrequencyControlledTaskManager} from "../lib";
+import {FrequencyControlledTaskManager} from "../frequency-control";
 import {sleep} from "@troubkit/tools";
 
 describe("FrequencyControlledTaskManager", () => {
     let manager: FrequencyControlledTaskManager;
 
-    beforeEach(()=>{
+    beforeEach(() => {
         manager = new FrequencyControlledTaskManager(100, 1);
     });
 
-    afterEach(()=>{
+    afterEach(() => {
         manager.stop();
     });
 
@@ -50,7 +50,7 @@ describe("FrequencyControlledTaskManager", () => {
         expect(executed).toBeFalsy();
     });
 
-    test("should not execute task after stop", async ()=>{
+    test("should not execute task after stop", async () => {
         let executed = false;
         manager.start();
         manager.addTask({
@@ -72,4 +72,53 @@ describe("FrequencyControlledTaskManager", () => {
         expect(executed).toBeFalsy();
     });
 
+    test("should return void if callback is provided", () => {
+        manager.start();
+        return Promise.all([
+            new Promise(resolve => {
+                const ret = manager.addTask(
+                    () => 1,
+                    (err, result) => {
+                        expect(err).toBeUndefined();
+                        expect(result).toBe(1);
+                        resolve(null);
+                    },
+                );
+                expect(ret).toBeUndefined();
+            }),
+            new Promise(resolve => {
+                const ret = manager.addTask(
+                    () => {
+                        throw new Error("err");
+                    },
+                    (err, result) => {
+                        expect(err?.message).toEqual("err");
+                        expect(result).toBeUndefined();
+                        resolve(null);
+                    },
+                );
+                expect(ret).toBeUndefined();
+            }),
+        ]);
+    });
+
+    test("should return a promise if callback is not provided", async () => {
+        manager.start();
+        const aPromise = manager.addTask(
+            () => 1,
+        );
+        expect(aPromise).toBeInstanceOf(Promise);
+        await expect(aPromise).resolves.toBe(1);
+
+        const promise = manager.addTask(
+            () => new Promise(r => r(1)),
+        );
+        expect(promise).toBeInstanceOf(Promise);
+        await expect(promise).resolves.toBe(1);
+
+        const rejectPromise = manager.addTask(
+            () => Promise.reject(new Error("err")),
+        );
+        await expect(rejectPromise).rejects.toThrow("err");
+    });
 });
