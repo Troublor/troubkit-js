@@ -78,7 +78,7 @@ class StructuredLogFormat {
         const label = info.label ? `[${info.label}]` : "";
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
-        info[MESSAGE] = `[${this.paintColor(
+        info[MESSAGE] = `${this.paintColor(
             info.level,
             info.level.toUpperCase().substring(0, 4).padEnd(4, " "),
         )}][${logTime}]${label} ${`${info.message}`.padEnd(
