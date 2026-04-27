@@ -134,4 +134,11 @@ describe("Command", () => {
         expect(cmd.command).toEqual("cmd");
         expect(cmd.args).toEqual(["'a'"]);
     });
+
+    test("should handle corner case5", () => {
+        const cmd = new Command("cmd 'a\\'b");
+        expect(cmd.toString()).toEqual("cmd 'a\\'b");
+        expect(cmd.command).toEqual("cmd");
+        expect(cmd.args).toEqual(["a\\b"]);
+    });
 });
